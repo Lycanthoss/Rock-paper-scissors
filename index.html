@@ -6,7 +6,58 @@
     <body>
 
         <script>
+            const CHOICES = {
+                rock: "rock",
+                paper: "paper",
+                scissors: "scissors"
+            };
+
+            function computerPlay() {
+                let randomNum = Math.floor(Math.random() * 4);
+                switch (randomNum) {
+                    case 1: return CHOICES.rock;
+                    case 2: return CHOICES.paper;
+                    case 3: return CHOICES.scissors;
+                    default: return CHOICES.rock;
+                }
+            }
+            function playRound(playerSelection, computerSelection) {
+                let lowerSelection = playerSelection.toLowerCase();
+
+                if (lowerSelection == computerSelection) return "Draw!";
+                if ((lowerSelection == CHOICES.rock && computerSelection == CHOICES.scissors) ||
+                    (lowerSelection == CHOICES.scissors && computerSelection == CHOICES.paper) ||
+                    (lowerSelection == CHOICES.paper && computerSelection == CHOICES.rock))
+                    return `You win! ${playerSelection} beats ${computerSelection}.`;
+                else return `You lose! ${playerSelection} loses to ${computerSelection}.`;
+            }
+
+            function game(roundCount) {
             
+                let playerWins = 0;
+                let computerWins = 0;
+
+                for (let i = 0; i < roundCount; i++)
+                {
+                    let playerSelection = prompt("Write 'rock', 'paper' or 'scissors' here.");
+                    let computerSelection = computerPlay();
+
+                    let roundMessage = playRound(playerSelection, computerSelection);
+
+                    if (roundMessage.includes("You win!"))
+                        playerWins++;
+                    else if (roundMessage.includes("You lose!"))
+                        computerWins++;
+                }
+
+                if (playerWins > computerWins)
+                    console.log(`You win ${playerWins} vs ${computerWins}`);
+                else if (playerWins == computerWins)
+                    console.log(`Draw! ${playerWins} vs ${computerWins}`);
+                else console.log(`You lose ${playerWins} vs ${computerWins}`);
+            }
+
+            game(5);
         </script>
     </body>
 </html>
