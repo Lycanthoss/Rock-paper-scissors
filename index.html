@@ -1,63 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+        <script src="https://kit.fontawesome.com/fc1819c339.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link href="/index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <div id="overlay">
+            <h1>Rock Paper Scissors</h1>
+            <a target="_blank" href="#" class="overlay-link"><span class="anim-link">< </span>Portfolio<span class="anim-link"> /></span></a>
+            <a target="_blank" href="https://github.com/Lycanthoss" class="overlay-link"><span class="anim-link">< </span>GitHub<span class="anim-link"> /></span></a>
 
-        <script>
-            const CHOICES = {
-                rock: "rock",
-                paper: "paper",
-                scissors: "scissors"
-            };
+            <button class="overlay-button" id="reset-button">Reset Game</button>
+            <button class="overlay-button" id="dark-mode-switch">Toggle Dark-Mode</button>
+        </div>
+        <button id="menu-button"><i class="fas fa-bars"></i></button>
+        <div id="main-body" class="dark-main light-main">
+            <button id="play-button" class="dark-button light-button">
+                Play
+            </button>
+            <div id="score">
+                <div class="score-tab">
+                    <h3 class="player-name">You</h3>
+                    <span id="player-score">0</span>
+                </div>
+                <div class="score-tab">
+                    <h3 class="player-name">A.I</h3>
+                    <span id="AI-score">0</span>
+                </div>
+            </div>
+            <div id="selectors">
+                <div class="selection">
+                    <button id="rock" class="select-button">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/rock.png"/>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button id="paper" class="select-button">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/paper.png"/>
+                    </button>
+                </div>
+                <div class="selection">
+                    <button id="scissors" class="select-button">
+                        <img src="https://img.icons8.com/ios-filled/50/000000/hand-scissors.png"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="gameLogic.js">
 
-            function computerPlay() {
-                let randomNum = Math.floor(Math.random() * 4);
-                switch (randomNum) {
-                    case 1: return CHOICES.rock;
-                    case 2: return CHOICES.paper;
-                    case 3: return CHOICES.scissors;
-                    default: return CHOICES.rock;
-                }
-            }
-            function playRound(playerSelection, computerSelection) {
-                let lowerSelection = playerSelection.toLowerCase();
-
-                if (lowerSelection == computerSelection) return "Draw!";
-                if ((lowerSelection == CHOICES.rock && computerSelection == CHOICES.scissors) ||
-                    (lowerSelection == CHOICES.scissors && computerSelection == CHOICES.paper) ||
-                    (lowerSelection == CHOICES.paper && computerSelection == CHOICES.rock))
-                    return `You win! ${playerSelection} beats ${computerSelection}.`;
-                else return `You lose! ${playerSelection} loses to ${computerSelection}.`;
-            }
-
-            function game(roundCount) {
-            
-                let playerWins = 0;
-                let computerWins = 0;
-
-                for (let i = 0; i < roundCount; i++)
-                {
-                    let playerSelection = prompt("Write 'rock', 'paper' or 'scissors' here.");
-                    let computerSelection = computerPlay();
-
-                    let roundMessage = playRound(playerSelection, computerSelection);
-
-                    if (roundMessage.includes("You win!"))
-                        playerWins++;
-                    else if (roundMessage.includes("You lose!"))
-                        computerWins++;
-                }
-
-                if (playerWins > computerWins)
-                    console.log(`You win ${playerWins} vs ${computerWins}`);
-                else if (playerWins == computerWins)
-                    console.log(`Draw! ${playerWins} vs ${computerWins}`);
-                else console.log(`You lose ${playerWins} vs ${computerWins}`);
-            }
-
-            game(5);
         </script>
     </body>
 </html>
